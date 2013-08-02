@@ -380,7 +380,9 @@ var inputType = {
   'hidden': noop,
   'button': noop,
   'submit': noop,
-  'reset': noop
+  'reset': noop,
+
+  'file': fileInputType
 };
 
 
@@ -666,6 +668,13 @@ function checkboxInputType(scope, element, attr, ctrl) {
   });
 }
 
+function fileInputType(scope, element, attr, ctrl) {
+  element.on('change', function() {
+    scope.$apply(function() {
+      ctrl.$setViewValue(element[0].value);
+    });
+  });
+}
 
 /**
  * @ngdoc directive
